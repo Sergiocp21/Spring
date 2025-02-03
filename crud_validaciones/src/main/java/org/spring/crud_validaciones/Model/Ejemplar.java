@@ -3,6 +3,8 @@ package org.spring.crud_validaciones.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -31,6 +33,8 @@ public class Ejemplar {
     @ColumnDefault("'Disponible'")
     @Lob
     @Column(name = "estado")
+    @Pattern(regexp = "^(Dañado|Disponible|Prestado)$", message = "Los unicos valores validos para el estado son: Dañado, Disponible y Prestado")
+    @NotNull
     private String estado;
 
     @OneToMany(mappedBy = "ejemplar")

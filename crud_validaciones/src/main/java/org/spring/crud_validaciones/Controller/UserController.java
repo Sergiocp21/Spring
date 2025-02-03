@@ -59,7 +59,7 @@ public class UserController {
         Usuario user = userService.findById(id);
         if(user != null) {
             userService.delete(id);
-            return ResponseEntity.status(200).body("Usuario boorrado");
+            return ResponseEntity.status(200).body("Usuario boorrado con exito");
         }
             return ResponseEntity.status(404).body("Error al borrar al usuario");
     }

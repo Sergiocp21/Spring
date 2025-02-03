@@ -52,12 +52,12 @@ public class EjemplarController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Ejemplar> deleteUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
         Ejemplar ejemplar = ejemplarService.findById(id);
         if(ejemplar != null) {
             ejemplarService.delete(id);
-            return ResponseEntity.status(200).body(ejemplar);
+            return ResponseEntity.status(200).body("Ejemplar eliminado con exito");
         }
-        return ResponseEntity.status(404).body(null);
+        return ResponseEntity.status(404).body("Error al eliminar el ejemplar");
     }
 }

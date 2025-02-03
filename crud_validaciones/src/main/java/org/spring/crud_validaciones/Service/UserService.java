@@ -25,7 +25,12 @@ public class UserService {
         if(userRepository.existsById(usuario.getId()) || usuario.getId() != null) {
             usuario.setId(null);
         }
-        return userRepository.save(usuario);
+        if(validDni(usuario.getDni())){
+            return userRepository.save(usuario);
+        }
+        else{
+            return null;
+        }
     }
 
     public Usuario update(Usuario usuario) {
@@ -37,6 +42,19 @@ public class UserService {
 
     public void delete(int id) {
         userRepository.deleteById(id);
+    }
+
+    private boolean validDni(String dni){
+        try{
+            int numDni = Integer.parseInt(dni.substring(0, dni.length()-1));
+            int resto = numDni%23;
+
+            char[] letras = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z'};
+
+            return (letras[resto] == dni.charAt(dni.length()-1));
+        }catch (NumberFormatException e){
+            return false;
+        }
     }
 
 }

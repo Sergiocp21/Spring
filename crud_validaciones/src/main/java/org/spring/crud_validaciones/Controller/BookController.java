@@ -53,12 +53,12 @@ public class BookController {
     }
 
     @DeleteMapping("/{isbn}")
-    public ResponseEntity<Libro> deleteUser(@PathVariable String isbn) {
+    public ResponseEntity<String> deleteUser(@PathVariable String isbn) {
         Libro book = bookService.findById(isbn);
         if(book != null) {
             bookService.delete(isbn);
-            return ResponseEntity.status(200).body(book);
+            return ResponseEntity.status(200).body("Libro eliminado con exito");
         }
-        return ResponseEntity.status(404).body(null);
+        return ResponseEntity.status(404).body("Error al eliminar el libro");
     }
 }

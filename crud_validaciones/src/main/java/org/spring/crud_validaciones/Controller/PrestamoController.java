@@ -53,12 +53,12 @@ public class PrestamoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Prestamo> deleteUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
         Prestamo prestamo = prestamoService.findById(id);
         if(prestamo != null) {
             prestamoService.delete(id);
-            return ResponseEntity.status(200).body(prestamo);
+            return ResponseEntity.status(200).body("Prestamo creado con exito");
         }
-        return ResponseEntity.status(404).body(null);
+        return ResponseEntity.status(404).body("Error al crear el prestamo");
     }
 }
